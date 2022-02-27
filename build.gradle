@@ -22,10 +22,10 @@ dependencies {
 publishing {
     repositories {
         maven {
-            url 'https://mymavenrepo.com/repo/YY3fKMiBuUNRQXBVvQhT/'
+            url 'https://mymavenrepo.com/repo/qXIQSYLJRlET5GJwhg9A/'
             credentials {
                 username 'myMavenRepo'
-                password 'azerty'
+                password 'aminaamina'
             }
         }
     }
