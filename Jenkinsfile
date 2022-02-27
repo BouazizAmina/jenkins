@@ -32,38 +32,38 @@ pipeline {
       }
     }
 
-//     stage('Code Analysis') {
-//       parallel {
-//         stage('Code Analysis') {
-//           steps {
-//             withSonarQubeEnv('My SonarQube Server') {
-//               bat(script: 'gradle sonarqube', returnStatus: true)
-//             }
-//
-//             waitForQualityGate true
-//           }
-//         }
-//
-//         stage('Test Reporting') {
-//           steps {
-//             cucumber 'reports/*json'
-//           }
-//         }
-//
-//       }
-//     }
-//
-//     stage('Deployment') {
-//       steps {
-//         bat 'gradle publish'
-//       }
-//     }
-//
-//     stage('Slack Notification') {
-//       steps {
-//         slackSend(token: 'T02SE6G6BC2/B02SSSMPFRP/W46DvXVHWtU09v3O5QaM3ts4', baseUrl: 'https://hooks.slack.com/services/', channel: '#ogl', message: 'The slack notification is sent successfully')
-//       }
-//     }
+    stage('Code Analysis') {
+      parallel {
+        stage('Code Analysis') {
+          steps {
+            withSonarQubeEnv('sonar') {
+              bat(script: 'gradle sonarqube', returnStatus: true)
+            }
+
+            waitForQualityGate true
+          }
+        }
+
+        stage('Test Reporting') {
+          steps {
+            cucumber 'reports/*json'
+          }
+        }
+
+      }
+    }
+
+    stage('Deployment') {
+      steps {
+        bat 'gradle publish'
+      }
+    }
+
+    stage('Slack Notification') {
+      steps {
+        slackSend(token: 'T02T348BSTT/B02SU90JYBD/nuIAUg6zvNdyTE5fAHRp5ACz', baseUrl: 'https://hooks.slack.com/services/', channel: '#discussion', message: 'message bien envoye')
+      }
+    }
 
   }
   environment {
